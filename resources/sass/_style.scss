@@ -1,0 +1,157 @@
+// ====================================
+// variables
+// ====================================
+$red: #E44049;
+$blue: #2D3E52;
+$green: #7FB231;
+
+// ====================================
+// Global style
+// ====================================
+*,a,div,form{
+    margin: 0;
+    padding: 0;
+}
+html{
+    scroll-behavior: smooth;
+}
+body{
+    overflow-x: hidden;
+}
+a{
+    &:hover{
+        text-decoration: none;
+    }
+}
+.mt-nav{
+    margin-top: 55px;
+}
+button{
+    border: 0px;
+}
+.text-blue{
+    color: $blue;
+}
+.text-red{
+    color: $red;
+}
+.bg-blue{
+    background-color: $blue;
+}
+.bg-red{
+    background-color: $red;
+}
+// ====================================
+// navbar
+// ====================================
+header{
+    background-color: $red;
+    height: 55px;
+    nav{
+        a.nav-logo{
+            font-family: 'Fascinate', cursive;
+            font-size: 2rem;
+            color: #fff;
+            transition: .3s;
+            &:hover{
+                color: $blue;
+            }
+        }
+        form{
+            input[type=text]{
+                width: 300px;
+                height: 1.8rem;
+                padding: .5rem .8rem;
+                border: 0px;
+            }
+            button{
+                padding: .2rem .5rem;
+                background-color: $blue;
+                color: #fff;
+                transition: .3s;
+                &:hover{
+                    background-color: $red;
+                    border: 1px solid $blue;
+                }
+            }
+        }
+        ul{
+            list-style: none;
+            li a{
+                color: #fff;
+                transition: .3s;
+                &:hover{
+                    color: $blue;
+                }
+            }
+        }
+    }
+}
+
+// ====================================
+// hero section
+// ====================================
+#hero{
+    width: 100%;
+    height: 100vh;
+    background:linear-gradient(90deg, rgba(45, 62, 82, 0.7) 35%,rgba(0,0,0,0)),url('/images/hero.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    div{
+        height: 100%;
+        h1{
+            font-size: 4rem;
+            font-weight: 600;
+        }
+        p{
+            font-size: 1rem;
+        }
+        a{
+            width: 200px;
+            background-color: $red;
+            color: #fff;
+            padding: .8rem;
+            font-size: 1.2rem;
+            border: 1px solid $red;
+            transition: all .3s;
+            &:hover{
+                background-color: transparent;
+                padding-left: 70px;
+            }
+        }
+    }
+}
+
+// ====================================
+// Places section
+// ====================================
+#places{
+    h2{
+        font-size: 2.5rem;
+    }
+    .col-md-3{
+        .card{
+            position: relative;
+            border: none;
+            overflow: hidden;
+            img{
+                transition: .5s;
+            }
+            .place-name{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: flex-end;
+                background: linear-gradient(0deg, rgba(0,0,0,.5) 5%, rgba(0,0,0,0));
+                color: #fff;
+            }
+            &:hover{
+                img{
+                    transform: scale(1.2);
+                }
+            }
+        }
+    }
+}
