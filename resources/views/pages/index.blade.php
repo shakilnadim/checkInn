@@ -14,7 +14,7 @@
     {{-- places --}}
     <section id="places" class="py-5 bg-blue">
         <h2 class="text-center text-red mb-4">Places</h2>
-        <div class="row">
+        <div class="row mx-2">
             @if(count($places)>0)
                 @foreach ($places as $place)
                     <div class="col-md-3 mt-4">

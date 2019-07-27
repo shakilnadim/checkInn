@@ -17,6 +17,7 @@ Route::get('hotels/{placeUrl}', 'PagesController@showHotels');
 Route::get('admin', 'AdminController@index');
 
 Route::resource('places', 'PlacesController');
+Route::resource('/hotel', 'HotelController');
 
 Auth::routes();
 

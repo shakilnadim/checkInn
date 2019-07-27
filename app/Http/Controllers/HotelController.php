@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Place;
+use App\Hotel;
 use App\Custom\Files;
+// use App\Http\Auth;
 
-class PlacesController extends Controller
+class HotelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,7 +27,8 @@ class PlacesController extends Controller
      */
     public function create()
     {
-        //
+        $places = Place::pluck('placeName', 'placeUrl')->all();
+        return view('hotel.create')->with('places', $places);
     }
 
     /**
@@ -36,25 +39,32 @@ class PlacesController extends Controller
      */
     public function store(Request $request)
     {
-       $this->validate($request, [
-           'place' => 'required',
-           'placeUrl' => 'required|unique:places',
-           'placeImg' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
-       ]);
+        $this->validate($request, [
+            'hotelName' => 'required',
+            'place' => 'required',
+            'hotelAddress' => 'required',
+            'phone' => 'required|numeric',
+            'aboutUs' => 'required',
+            'coverPic' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
+        ]);
 
         //handle file upload
-        if($request->hasFile('placeImg')){
+        if($request->hasFile('coverPic')){
             $files = new Files();
-            $fileNameToStore = $files->fileUpload($request->file('placeImg'), 'public/placesImg');
+            $fileNameToStore = $files->fileUpload($request->file('coverPic'), 'public/hotels');
         }
 
         //storing data into database
-        $place = new Place;
-        $place->placeName = $request->input('place');
-        $place->placeUrl = $request->input('placeUrl');
-        $place->placeImg = $fileNameToStore;
-        $place->save();
-        return redirect('admin')->with('success', 'New Place Added');
+        $hotel = new Hotel;
+        $hotel->hotelName = $request->input('hotelName');
+        $hotel->user_id = \Auth::user()->id;
+        $hotel->place_placeUrl = $request->input('place');
+        $hotel->hotelAddress = $request->input('hotelAddress');
+        $hotel->phone = $request->input('phone');
+        $hotel->aboutUs = $request->input('aboutUs');
+        $hotel->coverPic = $fileNameToStore;
+        $hotel->save();
+        return redirect('hotel/create')->with('success', 'Hotel Created');
     }
 
     /**
