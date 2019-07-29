@@ -10668,6 +10668,11 @@ a:hover {
   margin-top: 55px;
 }
 
+.wrapper {
+  width: 80%;
+  margin: 0 auto;
+}
+
 button {
   border: 0px;
 }
@@ -10773,21 +10778,25 @@ header nav ul li a:hover {
   padding-left: 70px;
 }
 
-#places h2 {
+#places h2,
+#room-types h2 {
   font-size: 2.5rem;
 }
 
-#places .col-md-3 .card {
+#places .col-md-3 .card,
+#room-types .col-md-3 .card {
   position: relative;
   border: none;
   overflow: hidden;
 }
 
-#places .col-md-3 .card img {
+#places .col-md-3 .card img,
+#room-types .col-md-3 .card img {
   transition: 0.5s;
 }
 
-#places .col-md-3 .card .place-name {
+#places .col-md-3 .card .place-name,
+#room-types .col-md-3 .card .place-name {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -10797,7 +10806,59 @@ header nav ul li a:hover {
   color: #fff;
 }
 
-#places .col-md-3 .card:hover img {
+#places .col-md-3 .card:hover img,
+#room-types .col-md-3 .card:hover img {
   transform: scale(1.2);
+}
+
+#cover-pic {
+  width: 100%;
+  height: 70vh;
+  overflow: hidden;
+  position: relative;
+}
+
+#cover-pic img {
+  width: 100%;
+  height: 100%;
+}
+
+#cover-pic .hotel-name {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#cover-pic .hotel-name h2 {
+  font-family: "Raleway", sans-serif;
+  font-style: italic;
+  color: #fff;
+  font-weight: 700;
+  font-size: 5rem;
+}
+
+#hotel-details p {
+  font-size: 1rem;
+  line-height: 1.8rem;
+}
+
+#hotel-details h3 {
+  font-weight: 600;
+  font-size: 2.5rem;
+}
+
+#hotel-details .col-md-9 {
+  box-shadow: 0px 0px 5px #2D3E52;
+}
+
+#hotel-details .col-md-3 div.p-4 {
+  border: 2px solid #7FB231;
 }
 

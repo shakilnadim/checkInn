@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Place;
-use App\Hotel;
+use App\RoomDetails;
+use App\Room;
 use App\Custom\Files;
 
-class HotelController extends Controller
+class RoomController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,8 +26,7 @@ class HotelController extends Controller
      */
     public function create()
     {
-        $places = Place::pluck('placeName', 'placeUrl')->all();
-        return view('hotel.create')->with('places', $places);
+        return view('hotel.createRoom');
     }
 
     /**
@@ -38,32 +37,45 @@ class HotelController extends Controller
      */
     public function store(Request $request)
     {
+        // validating data
         $this->validate($request, [
-            'hotelName' => 'required',
-            'place' => 'required',
-            'hotelAddress' => 'required',
-            'phone' => 'required|numeric',
-            'aboutUs' => 'required',
-            'coverPic' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
+            'roomType' => 'required',
+            'capacity' => 'required',
+            'price' => 'required|numeric',
+            'roomDescription' => 'required',
+            'roomNo' => 'required',
+            'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
         ]);
 
         //handle file upload
-        if($request->hasFile('coverPic')){
+        if($request->hasFile('img')){
             $files = new Files();
-            $fileNameToStore = $files->fileUpload($request->file('coverPic'), 'public/hotels');
+            $fileNameToStore = $files->fileUpload($request->file('img'), 'public/rooms');
         }
 
         //storing data into database
-        $hotel = new Hotel;
-        $hotel->hotelName = $request->input('hotelName');
-        $hotel->user_id = \Auth::user()->id;
-        $hotel->place_placeUrl = $request->input('place');
-        $hotel->hotelAddress = $request->input('hotelAddress');
-        $hotel->phone = $request->input('phone');
-        $hotel->aboutUs = $request->input('aboutUs');
-        $hotel->coverPic = $fileNameToStore;
-        $hotel->save();
-        return redirect('hotel/create')->with('success', 'Hotel Created');
+        $roomDetails = new RoomDetails;
+
+        $roomDetails->hotel_id = \Auth::user()->hotel->id;
+        $roomDetails->roomType = $request->input('roomType');
+        $roomDetails->roomDescription = $request->input('roomDescription');
+        $roomDetails->capacity = $request->input('capacity');
+        $roomDetails->price = $request->input('price');
+        $roomDetails->img = $fileNameToStore;
+
+        $roomDetails->save();
+
+        $rooms = explode(',', $request->input('roomNo'));
+        foreach($rooms as $room){
+            $roomNo = new Room;
+
+            $roomNo->room_details_id = $roomDetails->id;
+            $roomNo->roomNo = $room;
+
+            $roomNo->save();
+        }
+        
+        return redirect('room/create')->with('success', 'Rooms Created');
     }
 
     /**
@@ -74,12 +86,8 @@ class HotelController extends Controller
      */
     public function show($id)
     {
-        $hotel = Hotel::find($id);
-        $shortAbout = explode(' ', $hotel->aboutUs, 20);
-        array_pop($shortAbout);
-        $shortAbout = join(' ', $shortAbout);
-        $hotel['aboutUs'] = $shortAbout;
-        return view('hotel.profile')->with('hotel', $hotel);
+        $room = RoomDetails::find($id);
+        return view('hotel.singleRoom')->with('room', $room);
     }
 
     /**

@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {{-- font --}}
     <link href="https://fonts.googleapis.com/css?family=Fascinate&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:700i&display=swap" rel="stylesheet">
     {{-- icons --}}
     <script src="https://kit.fontawesome.com/3b4174c44f.js"></script>
     {{-- styles --}}

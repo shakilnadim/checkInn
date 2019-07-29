@@ -1,0 +1,11 @@
+[33mcommit d58626a0a0ef816e0c40990790416c4be29064a8[m[33m ([m[1;36mHEAD -> [m[1;32mhotelCreate[m[33m)[m
+Author: Nadim Shakil <shakilnadim@gmail.com>
+Date:   Sat Jul 27 16:46:01 2019 +0600
+
+    v0.2(user can create single hotel)
+
+[33mcommit 58124a95e8adbde392885ad395b3c914fe5e31e3[m[33m ([m[1;32mmaster[m[33m)[m
+Author: Nadim Shakil <shakilnadim@gmail.com>
+Date:   Fri Jul 26 22:58:07 2019 +0600
+
+    v0.1(added login and register)

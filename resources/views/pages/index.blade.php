@@ -4,7 +4,7 @@
 
     {{-- hero section --}}
     <section id="hero">
-        <div class="d-flex flex-column justify-content-center text-white container">
+        <div class="d-flex flex-column justify-content-center text-white wrapper">
             <h1>CheckInn</h1>
             <p>Now hotels are just one click away. Book your hotel and travel without worries.</p>
             <a href="#places"><i class="fas fa-arrow-right"></i> Book Now</a>

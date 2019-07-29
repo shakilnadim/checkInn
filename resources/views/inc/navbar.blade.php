@@ -1,5 +1,5 @@
 <header class="fixed-top shadow-sm">
-    <nav class="d-flex align-items-center container">
+    <nav class="d-flex align-items-center wrapper">
         <a href="/" class="nav-logo">{{config('app.name', 'CheckInn')}}</a>
 
         
@@ -35,7 +35,7 @@
                             @if (Auth::user()->hotel == null)
                                 <a href="hotel/create" class="dropdown-item">Create Hotel</a>
                             @else
-                                <a href="hotel/{{Auth::User()->hotel->id}}" class="dropdown-item">Manage Hotel</a>
+                                <a href="/hotel/{{Auth::User()->hotel->id}}" class="dropdown-item">Manage Hotel</a>
                             @endif
                         @endif
                         <a class="dropdown-item" href="{{ route('logout') }}"
