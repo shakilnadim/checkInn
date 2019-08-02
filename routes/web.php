@@ -14,11 +14,15 @@
 Route::get('/', 'PagesController@index');
 Route::get('hotels/{placeUrl}', 'PagesController@showHotels');
 
-Route::get('admin', 'AdminController@index');
+Route::get('/admin', 'AdminController@index');
+Route::get('/users/edit/{userId}', 'AdminController@editUser');
+Route::put('/users/{userid}', 'AdminController@updateRole');
 
 Route::resource('/places', 'PlacesController');
 Route::resource('/hotel', 'HotelController');
 Route::resource('/room', 'RoomController');
+Route::resource('/book', 'BookingController');
+Route::resource('/user', 'UserController');
 
 Auth::routes();
 

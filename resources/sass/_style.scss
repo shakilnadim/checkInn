@@ -2,7 +2,7 @@
 // variables
 // ====================================
 $red: #E44049;
-$blue: #2D3E52;
+$blue: #415976;
 $green: #7FB231;
 
 // ====================================
@@ -44,6 +44,30 @@ button{
 }
 .bg-red{
     background-color: $red;
+}
+.btn-outline-blue{
+    color: #fff;
+    padding: 8px 20px;
+    background-color: $blue;
+    border: 1px solid $blue;
+    transition: .3s;
+    text-align: center;
+    &:hover{
+        background-color: transparent;
+        color: $blue;
+    }
+}
+.btn-outline-red{
+    color: #fff;
+    padding: 8px 20px;
+    background-color: $red;
+    border: 1px solid $red;
+    transition: .3s;
+    text-align: center;
+    &:hover{
+        background-color: transparent;
+        color: $red;
+    }
 }
 // ====================================
 // navbar
@@ -128,13 +152,13 @@ header{
 }
 
 // ====================================
-// Places and room-types section 
+// Places and room-types section
 // ====================================
 #places, #room-types{
     h2{
         font-size: 2.5rem;
     }
-    .col-md-3{
+    .col-md-3, .col-md-4{
         .card{
             position: relative;
             border: none;
@@ -159,7 +183,11 @@ header{
         }
     }
 }
-
+#add-place{
+    .bg-white{
+        box-shadow: 0 0 15px $blue;
+    }
+}
 // ====================================
 // hotel profile
 // ====================================
@@ -205,6 +233,94 @@ header{
         box-shadow: 0px 0px 5px $blue;
     }
     .col-md-3 div.p-4{
-        border: 2px solid $green;
+        //border: 2px solid $green;
+        background-color: #57789F;
+        a{
+            transition: .3s;
+            &:hover{
+                color: #fff;
+            }
+        }
+    }
+}
+
+// ====================================
+// single rooms page
+// ====================================
+#booking{
+    .col-md-6{
+        background-color: #fff;
+        box-shadow: 0 0 15px $blue;
+    }
+}
+
+// ====================================
+// Side nav
+// ====================================
+#left-nav{
+    height: calc(100vh - 55px);
+    width: 200px;
+    position: fixed;
+    top: 55px;
+    left: 0;
+    nav{
+        ul{
+            list-style: none;
+            li a{
+                color: #fff;
+                display: block;
+                padding: 5px 0 5px 15px;
+                transition: .3s;
+                font-size: 1.2rem;
+                //border-bottom: 1px solid $blue;
+                &:hover{
+                    background-color: $red;
+                }
+            }
+        }
+    }
+}
+
+// ====================================
+// dashboard content
+// ====================================
+#dashboard-content{
+    width: calc(100% - 200px);
+    margin-left: 200px;
+    min-height: calc(100vh - 55px);
+    .admin-heading{
+        display: flex;
+    }
+    table{
+        tr:nth-child(even){
+            background-color: #fff;
+        }
+        td{
+            vertical-align: middle;
+        }
+        img{
+            width: 100px;
+            height: 70px;
+        }
+    }
+}
+
+// ====================================
+// hotel list
+// ====================================
+#hotel-list{
+    margin-top: 55px;
+    a{
+        background-color: #fff;
+        display: flex;
+        color: $blue;
+        transition: .3s;
+        img{
+            width: 200px;
+            height: 120px;
+        }
+        &:hover{
+            box-shadow: 5px 5px 10px $blue;
+        }
     }
 }

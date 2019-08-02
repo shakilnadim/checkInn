@@ -13,7 +13,7 @@ class PagesController extends Controller
     }
 
     public function showHotels($placeUrl){
-        $hotels = Place::find($placeUrl)->hotels;
-        return view('pages.hotels')->with('hotels', $hotels);
+        $place = Place::find($placeUrl);
+        return view('pages.hotels')->with('place', $place);
     }
 }

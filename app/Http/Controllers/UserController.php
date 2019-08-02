@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
-use App\Place;
-use App\Custom\Files;
 
-class PlacesController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class PlacesController extends Controller
      */
     public function index()
     {
-        $places = Place::all();
-        return view('admin/places')->with('places', $places);
+        $users = User::all();
+        return view('admin.users')->with('users', $users);
     }
 
     /**
@@ -26,7 +25,7 @@ class PlacesController extends Controller
      */
     public function create()
     {
-        return view('admin.addPlace');
+        //
     }
 
     /**
@@ -37,25 +36,7 @@ class PlacesController extends Controller
      */
     public function store(Request $request)
     {
-       $this->validate($request, [
-           'place' => 'required',
-           'placeUrl' => 'required|unique:places',
-           'placeImg' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
-       ]);
-
-        //handle file upload
-        if($request->hasFile('placeImg')){
-            $files = new Files();
-            $fileNameToStore = $files->fileUpload($request->file('placeImg'), 'public/placesImg');
-        }
-
-        //storing data into database
-        $place = new Place;
-        $place->placeName = $request->input('place');
-        $place->placeUrl = $request->input('placeUrl');
-        $place->placeImg = $fileNameToStore;
-        $place->save();
-        return redirect('admin')->with('success', 'New Place Added');
+        //
     }
 
     /**
@@ -100,6 +81,8 @@ class PlacesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return $this->index();
     }
 }

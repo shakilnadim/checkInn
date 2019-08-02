@@ -2,7 +2,7 @@
     <nav class="d-flex align-items-center wrapper">
         <a href="/" class="nav-logo">{{config('app.name', 'CheckInn')}}</a>
 
-        
+
         <form action="" method="get" class="d-flex ml-5">
             <div>
                 <input type="text" name="searchHotel" placeholder="Search Hotels">
@@ -33,10 +33,12 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         @if(Auth::user()->role == 'manager')
                             @if (Auth::user()->hotel == null)
-                                <a href="hotel/create" class="dropdown-item">Create Hotel</a>
+                                <a href="/hotel/create" class="dropdown-item">Create Hotel</a>
                             @else
                                 <a href="/hotel/{{Auth::User()->hotel->id}}" class="dropdown-item">Manage Hotel</a>
                             @endif
+                        @elseif(Auth::user()->role == 'admin')
+                            <a href="/admin" class="dropdown-item">Dashboard</a>
                         @endif
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
