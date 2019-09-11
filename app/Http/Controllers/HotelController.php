@@ -80,6 +80,11 @@ class HotelController extends Controller
         array_pop($shortAbout);
         $shortAbout = join(' ', $shortAbout);
         $hotel['aboutUs'] = $shortAbout;
+
+//        room types for booking form
+        $roomTypes = $hotel->roomDetails->pluck('roomType', 'id')->all();
+        $hotel['roomTypes'] = $roomTypes;
+
         return view('hotel.profile')->with('hotel', $hotel);
     }
 

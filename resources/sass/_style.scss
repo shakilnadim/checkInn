@@ -220,6 +220,12 @@ header{
         }
     }
 }
+#booking{
+    .col-md-8{
+        background-color: #fff;
+        box-shadow: 0 0 15px $blue;
+    }
+}
 #hotel-details{
     p{
         font-size: 1rem;
@@ -247,12 +253,7 @@ header{
 // ====================================
 // single rooms page
 // ====================================
-#booking{
-    .col-md-6{
-        background-color: #fff;
-        box-shadow: 0 0 15px $blue;
-    }
-}
+
 
 // ====================================
 // Side nav

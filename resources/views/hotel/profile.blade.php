@@ -7,7 +7,42 @@
             <h2>{{$hotel->hotelName}}</h2>
         </div>
     </section>
-    <section id="hotel-details" class="py-5 bg-blue">
+    <section id="hotel-details" class="py-5">
+        {{-- booking section --}}
+        <section id="booking" class="py-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8 p-4">
+                    @include('inc.messages')
+                    <h2 class="text-center text-red mb-3">Book Now</h2>
+                    {{ Form::open(['action' => 'BookingController@store', 'method' => 'POST']) }}
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            {{Form::label('roomType', 'Room Type')}}
+                            {{Form::select('roomType', $hotel['roomTypes'], null, ['class' => 'form-control', 'placeholder' => 'Select Room Type'])}}
+                        </div>
+                        <div class="form-group col-md-3">
+                            {{Form::label('roomQty', 'Number of Rooms')}}
+                            {{Form::text('roomQty', '1', ['class' => 'form-control', 'required'])}}
+                        </div>
+                        <div class="form-group col-md-3">
+                            {{Form::label('startDate', 'Checkin Date')}}
+                            {{Form::date('startDate', \Carbon\Carbon::now(), ['class' => 'form-control'])}}
+                        </div>
+                        <div class="form-group col-md-3">
+                            {{Form::label('endDate', 'Checkout Date')}}
+                            {{Form::date('endDate', date('Y-m-d'), ['class' => 'form-control'])}}
+                        </div>
+                        <div class="col text-center">
+                            <div class="form-group">
+                                {{Form::submit('Book Now', ['class' => 'btn btn-danger'])}}
+                            </div>
+                        </div>
+
+                    </div>
+                    {{ Form::close() }}
+                </div>
+            </div>
+        </section>
 
         <div class="row">
             <div id="room-types" class="col-md-9">

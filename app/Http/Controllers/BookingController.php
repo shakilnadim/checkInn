@@ -6,10 +6,11 @@ use Illuminate\Http\Request;
 use DateTime;
 use App\Booking;
 use App\RoomDetails;
+use Carbon\Carbon;
 
 class BookingController extends Controller
 {
-    /**
+    /*
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -19,7 +20,7 @@ class BookingController extends Controller
         //
     }
 
-    /**
+    /*
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -29,7 +30,7 @@ class BookingController extends Controller
         //
     }
 
-    /**
+    /*
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -40,17 +41,23 @@ class BookingController extends Controller
         $this->validate($request, [
             'roomQty' => 'required|numeric',
             'startDate' => 'required',
-            'endDate' => 'required'
+            'endDate' => 'required',
+            'roomType' => 'required'
         ]);
 
+        $roomDetails = RoomDetails::find($request->input('roomType'));
 
         $date = DateTime::createFromFormat('Y-m-d', $request->input('startDate'));
         $startDate = $date->format('Y-m-d H:i:s');
         $date = DateTime::createFromFormat('Y-m-d', $request->input('endDate'));
         $endDate = $date->format('Y-m-d H:i:s');
+        $date = new Carbon;
 
+        if ($startDate>$endDate || $startDate < $date::now()){
+            return redirect("/hotel/$roomDetails->hotel_id")->with('error', 'Invalid Date');
+        }
 
-        $bookings = Booking::where('room_details_id', '=', $request->input('roomDetailsId'))
+        $bookings = Booking::where('room_details_id', '=', $request->input('roomType'))
         ->where(function($query) use ($startDate, $endDate){
             $query->whereBetween('startDate', [$startDate, $endDate])
             ->orWhereBetween('endDate', [$startDate, $endDate])
@@ -60,7 +67,6 @@ class BookingController extends Controller
             });
         })->get();
 
-        $roomDetails = RoomDetails::find($request->input('roomDetailsId'));
         if (count($roomDetails->rooms) >= count($bookings)+$request->input('roomQty')){
             $booked = 0;
             foreach ($roomDetails->rooms as $room){
@@ -76,25 +82,25 @@ class BookingController extends Controller
                     $newBooking->user_id = \Auth::user()->id;
                     $newBooking->room_id = $room->id;
                     $newBooking->hotel_id = $roomDetails->hotel_id;
-                    $newBooking->room_details_id = $request->input('roomDetailsId');
+                    $newBooking->room_details_id = $request->input('roomType');
                     $newBooking->startDate = $startDate;
                     $newBooking->endDate = $endDate;
                     $newBooking->expense = $roomDetails->price;
                     $newBooking->save();
                     $booked++;
                     if ($booked == $request->input('roomQty')){
-                        return 'booked';
+                        return redirect("/hotel/$roomDetails->hotel_id")->with('success', 'booked');
                     }
                 }
             }
-           return 'not booked inside';
+           return redirect("/hotel/$roomDetails->hotel_id")->with('error', 'There was something wrong. Please try again');
         }else{
-            return 'not booked';
+            return redirect("/hotel/$roomDetails->hotel_id")->with('error', 'Rooms are not available');
         }
 
     }
 
-    /**
+    /*
      * Display the specified resource.
      *
      * @param  int  $id
@@ -105,7 +111,7 @@ class BookingController extends Controller
         //
     }
 
-    /**
+    /*
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -116,7 +122,7 @@ class BookingController extends Controller
         //
     }
 
-    /**
+    /*
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -128,7 +134,7 @@ class BookingController extends Controller
         //
     }
 
-    /**
+    /*
      * Remove the specified resource from storage.
      *
      * @param  int  $id

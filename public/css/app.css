@@ -10884,6 +10884,11 @@ header nav ul li a:hover {
   font-size: 5rem;
 }
 
+#booking .col-md-8 {
+  background-color: #fff;
+  box-shadow: 0 0 15px #415976;
+}
+
 #hotel-details p {
   font-size: 1rem;
   line-height: 1.8rem;
@@ -10908,11 +10913,6 @@ header nav ul li a:hover {
 
 #hotel-details .col-md-3 div.p-4 a:hover {
   color: #fff;
-}
-
-#booking .col-md-6 {
-  background-color: #fff;
-  box-shadow: 0 0 15px #415976;
 }
 
 #left-nav {

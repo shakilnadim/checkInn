@@ -21,8 +21,6 @@ class AdminController extends Controller
         $user->role = $request->input('role');
         $user->save();
 
-        $userController = new UserController;
-
-        return $userController->index();
+        return redirect('/user');
     }
 }
